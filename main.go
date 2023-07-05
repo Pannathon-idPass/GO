@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-
+	fmt.Fprintf(nil, "server port: 8080")
 	http.HandleFunc("/", start)
 	err := http.ListenAndServe(":8080", nil)
 
