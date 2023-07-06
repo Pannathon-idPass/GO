@@ -2,20 +2,22 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 )
 
 func main() {
-	fmt.Println("server port: 8080")
-	http.HandleFunc("/", start)
-	err := http.ListenAndServe(":8080", nil)
 
-	if err != nil {
-		fmt.Println(err)
-	}
+	http.HandleFunc("/", getRoot)
+	http.ListenAndServe(":8080", nil)
+
 }
 
-func start(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Start")
-
+func getRoot(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("got / request\n")
+	io.WriteString(w, "This is my website!\n")
+}
+func getHello(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("got /hello request\n")
+	io.WriteString(w, "Hello, HTTP!\n")
 }
